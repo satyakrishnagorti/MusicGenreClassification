@@ -8,4 +8,7 @@ GENRE_CLASSES = ['jazz','metal','pop','rock']
 TEST_DIR = "/home/krishna/Documents/workspace/MusicGenreDetection/test/"
 ROOT_DIR = "/home/krishna/Documents/workspace/MusicGenreDetection/"
 FFT_PATH = "/home/krishna/Documents/workspace/MusicGenreClassification/fft_features/"
+FFT_TEST_PATH = "/home/krishna/Documents/workspace/MusicGenreClassification/fft_features_test/"
+MFCC_PATH = "/home/krishna/Documents/workspace/MusicGenreClassification/mfcc_features/"
+MFCC_TEST_PATH = "/home/krishna/Documents/workspace/MusicGenreClassification/mfcc_features_test/"
 DUMP_PATH = "/home/krishna/Documents/workspace/MusicGenreClassification/data_dump/"

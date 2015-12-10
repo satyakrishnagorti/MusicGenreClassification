@@ -13,14 +13,16 @@ import json
 from sklearn.linear_model.logistic import LogisticRegression
 from sklearn.externals import joblib
 import glob
-from constants import FFT_PATH,INIT_DIR,DATA_DIR,GENRE_CLASSES,ROOT_DIR,TEST_DIR,DUMP_PATH,FFT_TEST_PATH,MFCC_PATH,MFCC_TEST_PATH
+from constants import INIT_DIR,DATA_DIR,GENRE_CLASSES,ROOT_DIR,TEST_DIR,DUMP_PATH,MFCC_PATH,MFCC_TEST_PATH
 from utils import read_fft
+from mfcc_utils import read_mfcc  
 from sklearn.metrics import accuracy_score
 from sklearn.neighbors import KNeighborsClassifier
 from sklearn import svm
 from sklearn.multiclass import OneVsRestClassifier
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.tree import DecisionTreeClassifier
+
 
 def classification_model(name):
   print "name is:"+name
@@ -42,11 +44,12 @@ def classification_model(name):
     print "default : logistical regression"
     clf = LogisticRegression()
     return clf
-  return clf 
+  return clf
 
 def train_model(x,y):
   clf = classification_model("decisiontree")
   clfs = []
+  print x.shape, y.shape
   clf.fit(x,y)
   print "Writing model"
   joblib.dump(clf,DUMP_PATH+"clf.pkl")
@@ -59,20 +62,22 @@ def myplot(x,y,x_test,y_test,y_pred):
   fprs = defaultdict(list)
   labels = np.unique(y)
   for label in labels:
-    y_label_test = np.asarray(y_test == label)
+    y_label
 
 
 if __name__ == '__main__':
   import timeit
   start = timeit.default_timer()
   print "reading x,y np array"
-  x,y = read_fft(FFT_PATH)
+  x,y = read_mfcc(MFCC_PATH)
+
   print "printing y:"
   print y
-  x_test,y_test = read_fft(FFT_TEST_PATH)
+  x_test,y_test = read_mfcc(MFCC_TEST_PATH)
   print "printing y_test"
-  print y_test
+  print y_test, y_test.shape
   print 'running classifier'
+  print x.shape
   clf = train_model(x,y)
   y_pred = clf.predict(x_test)
   print "printing y_pred"
